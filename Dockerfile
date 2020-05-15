@@ -11,7 +11,7 @@ FROM base as dev
 ENV NODE_ENV=development
 ENV PATH=/app/node_modules/.bin:$PATH
 RUN npm install --only=development
-CMD ["nodemon", "./index.js", "--inspect=0.0.0.0:9229"]
+CMD ["npm", "run", "dev"]
 
 FROM base as source
 COPY --chown=node:node . .
@@ -24,4 +24,4 @@ RUN npm test
 CMD ["npm", "run", "test"]
 
 FROM source as prod
-CMD ["node", "index.js"]
+CMD ["npm", "run", "start"]
